@@ -2,9 +2,9 @@
   "compilerOptions":{
     "module":"commonjs",
     "target":"es2019",
-    "noImplicitAny":false,// 在表达式和声明上有隐含的'any'类型时报错,最好之后改成true
+    "noImplicitAny":false,
     "sourceMap":true,
-    "outDir":"./dist",//输出目录
+    "outDir":"./dist",
     "baseUrl":".",
     "paths":{
       "*":["node_modules/*"]

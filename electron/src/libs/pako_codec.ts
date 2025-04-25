@@ -8,14 +8,14 @@ export class PakoCodec extends Codec{
         this._savePath = savePath
     }
     get_codec_path() {
-        const rootPath = path.join(__dirname, '..', '..', '..', '..', '..', '..', '..', '..', '..', '..', '..', '..', '..', '..', '..', '..', '..', '..', '..', '..', '..', '..', '..', '..', '..', '..', '..', '..', '..', '..', '..', '..', '..', '..', '..', '..', '..', '..', '..', '..', '..', '..', '..', '..', '..)
+        return path.join(__dirname)
     }
 
-    decode(data) {
-        return data
+    decode(saveFilePath: string): unknown {
+        return ''
     }
-    encode(data) {
-        return data
+    encode(saveFilePath:string):unknown {
+        return ""
     }
 }
 module.exports = PakoCodec

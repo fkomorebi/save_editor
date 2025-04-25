@@ -7,7 +7,7 @@ contextBridge.exposeInMainWorld('ipcBridge', {
     },
     'loadCodecFile': (absolutePath: string) => {
         ipcRenderer.invoke('loadCodecFile', absolutePath);
-    }'
+    }
 })
 contextBridge.exposeInMainWorld('webUtils', webUtils)
 console.log('preload.js loaded')

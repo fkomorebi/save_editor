@@ -1,13 +1,20 @@
+const path = require('path')
+
 const Codec = require('./codec_interface')
 export class LzCodec extends Codec{
     constructor() {
         super();
     }
-    encode(data) {
-        return data;
+
+    get_codec_path() {
+        return path.join(__dirname)
     }
-    decode(data) {
-        return data;
+
+    decode(saveFilePath: string): unknown {
+        return ''
+    }
+    encode(saveFilePath:string):unknown {
+        return ""
     }
 }
 module.exports = LzCodec

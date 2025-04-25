@@ -1,5 +1,5 @@
 export interface Codec {
-    get_codec_path();
-    encode(savePath: string);
-    decode(savePath: string);
+    get_codec_path(): string;
+    encode(savePath: string): unknown;
+    decode(savePath: string): unknown;
 }

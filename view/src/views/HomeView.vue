@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-const selectFile = (e: DragEvent | MouseEvent) => {
+const selectFile = (e: DragEvent | MouseEvent, fileType: 'saveFile' | 'codecFile') => {
   e.preventDefault();
   e.stopPropagation();
   e.stopImmediatePropagation();
@@ -20,26 +20,31 @@ const selectFile = (e: DragEvent | MouseEvent) => {
         file = input.files[0];
       }
       if (file) {
-        handleFile(file);
+        handleFile(file, fileType);
       }
     };
     input.click();
   }
   if (file) {
-    handleFile(file);
+    handleFile(file, fileType);
   }
 }
 
-const handleFile = (file: File) => {
+const handleFile = (file: File, fileType: 'saveFile' | 'codecFile') => {
   console.log('File name:', file.name);
   console.log('File size:', file.size);
   console.log('File type:', file.type);
+  console.log()
 
   // 将文件转换为 Blob 对象
   // const blob = new Blob([file], { type: file.type });
   // console.log('Blob:', blob);
   // console.log('File', file)
-  window.ipc_bridge.load_file('load_file', file)
+  if (fileType === 'saveFile') {
+    window.ipcBridge.loadSaveFile(window.webUtils.getPathForFile(file))
+  } else if (fileType === 'codecFile'){
+    window.ipcBridge.loadCodecFile(window.webUtils.getPathForFile(file))
+  }
 }
 
 const handleDragOver = (e: DragEvent) => {
@@ -50,9 +55,14 @@ const handleDragOver = (e: DragEvent) => {
 
 <template>
   <div class="p-6">
-    <div class="h-30 bg-blue-400 rounded-lg" @click="selectFile" @drop="selectFile" @dragover="handleDragOver">
+    <div class="h-30 bg-blue-400 rounded-lg" @click="e=>selectFile(e, 'saveFile')" @drop="e=>selectFile(e, 'saveFile')" @dragover="handleDragOver">
       <div class="w-full h-full rounded-lg border-4 border-amber-100 flex justify-center items-center">
-        选择文件，或将文件拖拽到此
+        选择存档文件，或将文件拖拽到此
+      </div>
+    </div>
+    <div class="h-30 bg-blue-400 rounded-lg" @click="e=>selectFile(e, 'codecFile')" @drop="e=>selectFile(e, 'codecFile')" @dragover="handleDragOver">
+      <div class="w-full h-full rounded-lg border-4 border-amber-100 flex justify-center items-center">
+        选择存档加解密文件，或将文件拖拽到此
       </div>
     </div>
   </div>

@@ -1,6 +1,10 @@
 
-declare let window: Window & {
-  ipc_bridge: {
-    load_file: (file: File) => void
+interface Window {
+  ipcBridge: {
+    loadSaveFile: (filePath: string) => void
+    loadCodecFile: (filePath: string) => void
   }
-};
+  webUtils: {
+    getPathForFile(file: File): string;
+  }
+}

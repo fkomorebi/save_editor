@@ -1,16 +1,22 @@
 {
-  "name": "electron",
+  "name": "electron-vue",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/main.ts",
   "scripts": {
-    "start": "electron electron.js"
+    "build": "tsc",
+    "watch": "tsc -w",
+    "start": "npm run build && electron ./dist/main.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "packageManager": "pnpm@10.8.1",
   "dependencies": {
-    "electron": "^35.2.0"
+    "electron": "^35.2.0",
+    "eslint": "^9.25.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.14.1",
+    "typescript": "^5.8.3"
   }
 }

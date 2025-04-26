@@ -5,6 +5,7 @@ import {CodecFactory} from './codec';
 
 let codec = null
 let saveFile = null
+let savePath = null
 
 const startLoadData = async () => {
     if (!codec) {
@@ -16,8 +17,7 @@ const startLoadData = async () => {
         return
     }
     try {
-        const data = await codec.decode(saveFile)
-        // TODO: send data to renderer process
+        return await codec.decode(saveFile)
     } catch (e) {
         console.error('decode error', e)
     }
@@ -30,12 +30,13 @@ ipcMain.handle('loadSaveFile', async (event, arg) => {
         return
     }
 
+    savePath = arg
     saveFile = fs.readFileSync(arg, 'utf-8')
     if (!codec) {
         console.log('codec not load')
         return
     }
-    startLoadData()
+    return startLoadData()
 })
 ipcMain.handle('loadCodecFile', async (event: IpcMainInvokeEvent, arg:string) => {
     console.log('loadCodecFile', arg)
@@ -51,5 +52,14 @@ ipcMain.handle('loadCodecFile', async (event: IpcMainInvokeEvent, arg:string) =>
         console.log('saveFile not load')
         return
     }
-    startLoadData()
+    return startLoadData()
+})
+
+ipcMain.handle('exportSaveFile', async (event: IpcMainInvokeEvent, arg: string) => {
+    try {
+        const data = await codec.encode(arg)
+        fs.writeFileSync(savePath, data, 'utf-8')
+    }catch (e) {
+        console.error('error', e)
+    }
 })

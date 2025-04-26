@@ -1,5 +1,9 @@
 <script setup lang="ts">
 import { ref } from 'vue';
+import SaveEditor from "@/components/SaveEditor.vue";
+
+const saveData = ref<SaveData>()
+
 const selectFile = (e: DragEvent | MouseEvent, fileType: 'saveFile' | 'codecFile') => {
   e.preventDefault();
   e.stopPropagation();
@@ -30,7 +34,7 @@ const selectFile = (e: DragEvent | MouseEvent, fileType: 'saveFile' | 'codecFile
   }
 }
 
-const handleFile = (file: File, fileType: 'saveFile' | 'codecFile') => {
+const handleFile = async (file: File, fileType: 'saveFile' | 'codecFile') => {
   console.log('File name:', file.name);
   console.log('File size:', file.size);
   console.log('File type:', file.type);
@@ -40,11 +44,16 @@ const handleFile = (file: File, fileType: 'saveFile' | 'codecFile') => {
   // const blob = new Blob([file], { type: file.type });
   // console.log('Blob:', blob);
   // console.log('File', file)
+  let fileData: string | null = null
   if (fileType === 'saveFile') {
-    window.ipcBridge.loadSaveFile(window.webUtils.getPathForFile(file))
+    fileData = await window.ipcBridge.loadSaveFile(window.webUtils.getPathForFile(file))
   } else if (fileType === 'codecFile'){
-    window.ipcBridge.loadCodecFile(window.webUtils.getPathForFile(file))
+    fileData = await window.ipcBridge.loadCodecFile(window.webUtils.getPathForFile(file))
   }
+  if (fileData) {
+    saveData.value = JSON.parse(fileData);
+  }
+  console.log(saveData.value)
 }
 
 const handleDragOver = (e: DragEvent) => {
@@ -65,6 +74,7 @@ const handleDragOver = (e: DragEvent) => {
         选择存档加解密文件，或将文件拖拽到此
       </div>
     </div>
+    <SaveEditor v-if="saveData" :saveData="saveData" />
   </div>
 </template>
 

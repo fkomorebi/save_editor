@@ -3,12 +3,12 @@ import {Codec} from './codec_interface';
 
 type Pako = {
     inflate: (data: File, options: { to: string }) => string;
-    deflate: (data: File, options: { encoding: string }) => unknown;
+    deflate: (data: string, options: { to: string, level: number }) => unknown;
 }
 
 export class PakoCodec implements Codec{
     private readonly _codecPath: string;
-    private _pako: Promise<Pako> = null;
+    private readonly _pako: Promise<Pako> = null;
     constructor(codecPath: string) {
         this._codecPath = codecPath
         this._pako = import(codecPath)
@@ -23,7 +23,11 @@ export class PakoCodec implements Codec{
             to: "string"
         });
     }
-    encode(saveFilePath:string):unknown {
-        return ""
+    async encode(saveDataStr:string):Promise<unknown> {
+        const pako = await this._pako
+        return pako.deflate(saveDataStr, {
+            to: "string",
+            level: 1
+        });
     }
 }

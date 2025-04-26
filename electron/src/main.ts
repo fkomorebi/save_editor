@@ -23,12 +23,7 @@ const main = async ()=>{
     }
 
     app.whenReady().then(() => {
-        ipcMain.handle('loadSaveFile', (event, arg) => {
-            console.log('loadSaveFile', arg)
-        })
-        ipcMain.handle('loadCodecFile', (event, arg) => {
-            console.log('loadCodecFile', arg)
-        })
+        import('./libs/ipc_main.js')
         createWindow()
     })
 

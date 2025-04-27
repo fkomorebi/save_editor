@@ -1,39 +1,5 @@
-# view
+# 存档修改器
 
-This template should help get you started developing with Vue 3 in Vite.
+存档修改器是一个用于修改游戏存档的工具，~~支持多种游戏类型和平台~~（还不支持）。它可以帮助玩家修改游戏中的各种数据，如金钱、经验、物品等，以便更好地体验游戏。
 
-## Recommended IDE Setup
-
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
-
-## Type Support for `.vue` Imports in TS
-
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vite.dev/config/).
-
-## Project Setup
-
-```sh
-pnpm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
-pnpm dev
-```
-
-### Type-Check, Compile and Minify for Production
-
-```sh
-pnpm build
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-pnpm lint
-```
+项目目前处于开发阶段，尚未完成。请注意，使用存档修改器可能会导致游戏数据损坏或无法正常运行，请谨慎使用。**使用前备份存档文件**。

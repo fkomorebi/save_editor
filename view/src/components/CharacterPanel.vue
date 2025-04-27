@@ -16,10 +16,9 @@ const props = defineProps<{
           <h4>{{ character._name }}</h4>
           <div>
             <DataInput :name="`等级`" v-model="character._level"></DataInput>
+            <DataInput :name="`最大等级`" v-model="character._maxLevel"></DataInput>
             <DataInput :name="`生命值`" v-model="character._hp"></DataInput>
             <DataInput :name="`魔法值`" v-model="character._mp"></DataInput>
-            <DataInput :name="`攻击力`" v-model="character.attack"></DataInput>
-            <DataInput :name="`防御力`" v-model="character.defense"></DataInput>
           </div>
         </div>
       </div>

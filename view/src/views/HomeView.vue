@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import SaveEditor from "@/components/SaveEditor.vue";
+import JsonEditorVue from "json-editor-vue3"
 
 const saveData = ref<SaveData>()
 
@@ -74,7 +75,8 @@ const handleDragOver = (e: DragEvent) => {
         选择存档加解密文件，或将文件拖拽到此
       </div>
     </div>
-    <SaveEditor v-if="saveData" :saveData="saveData" />
+<!--    <SaveEditor v-if="saveData" :saveData="saveData" />-->
+    <JsonEditorVue v-if="saveData" v-model="saveData" currentMode="tree" :modelList="['tree', 'code', 'form', 'text', 'view']"/>
   </div>
 </template>
 

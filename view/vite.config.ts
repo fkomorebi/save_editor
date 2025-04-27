@@ -4,6 +4,7 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vueDevTools from 'vite-plugin-vue-devtools'
 import tailwindcss from '@tailwindcss/vite'
+import { viteCommonjs } from '@originjs/vite-plugin-commonjs'
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -12,6 +13,7 @@ export default defineConfig({
     vue(),
     vueDevTools(),
     tailwindcss(),
+    viteCommonjs()
   ],
   resolve: {
     alias: {

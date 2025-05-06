@@ -9,6 +9,18 @@ const router = createRouter({
       path: '/',
       name: 'home',
       component: HomeView,
+      children: [
+        {
+          path: '/original-editor',
+          name: 'original-editor',
+          component: () => import('@/views/OriginalEditor.vue'),
+        },
+        {
+          path: '/simple-editor',
+          name: 'simple-editor',
+          component: () => import('@/views/SimpleEditor.vue'),
+        }
+      ]
     },
   ],
 })

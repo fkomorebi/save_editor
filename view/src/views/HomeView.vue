@@ -1,8 +1,6 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-import SaveEditor from "@/components/SaveEditor.vue";
-import JsonEditorVue from "json-editor-vue3"
-
+const router = useRouter()
+const route = useRoute()
 const saveData = ref<SaveData>()
 
 const selectFile = (e: DragEvent | MouseEvent, fileType: 'saveFile' | 'codecFile') => {
@@ -61,6 +59,13 @@ const handleDragOver = (e: DragEvent) => {
   e.preventDefault();
   e.stopPropagation();
 }
+const handleRouteChange = ()=>{
+  if (route.name === 'original-editor') {
+    router.push('/simple-editor')
+  } else {
+    router.push('/original-editor')
+  }
+}
 </script>
 
 <template>
@@ -75,8 +80,10 @@ const handleDragOver = (e: DragEvent) => {
         选择存档加解密文件，或将文件拖拽到此
       </div>
     </div>
-<!--    <SaveEditor v-if="saveData" :saveData="saveData" />-->
-    <JsonEditorVue v-if="saveData" v-model="saveData" currentMode="tree" :modelList="['tree', 'code', 'form', 'text', 'view']"/>
+    <div class="mt-2">
+      <button class="block ml-auto p-4 rounded-lg bg-blue-400" @click="handleRouteChange">{{$t('v.changeEditor')}}</button>
+    </div>
+    <RouterView v-if="saveData" v-model="saveData" class="mt-2"/>
   </div>
 </template>
 
